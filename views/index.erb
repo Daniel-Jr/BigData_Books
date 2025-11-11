@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Search</title>
+  <style>
+    html,body { height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f5f7fa; }
+    .center-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .search-card { width:100%; max-width:720px; background:#fff; border-radius:12px; padding:32px; box-shadow:0 6px 24px rgba(18,38,63,0.08); }
+    .search-form { display:flex; gap:12px; align-items:center; }
+    .search-input { flex:1; padding:14px 16px; font-size:18px; border:1px solid #e3e7ee; border-radius:8px; outline:none; transition:box-shadow .12s, border-color .12s; }
+    .search-input:focus { box-shadow:0 4px 18px rgba(3,102,214,0.12); border-color:#0366d6; }
+    .search-btn { padding:12px 18px; font-size:16px; border:none; border-radius:8px; background:#0366d6; color:#fff; cursor:pointer; }
+    .search-btn:hover { background:#0256b3; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width:520px){ .search-form { flex-direction:column; } .search-btn { width:100%; } }
+  </style>
+</head>
+    <body>
+    <div class="center-wrap">
+        <div class="search-card" role="main" aria-labelledby="searchHeading">
+        <h1 id="searchHeading" style="margin:0 0 12px 0; font-size:20px; color:#0f1724;">Search</h1>
+
+        <form class="search-form" action="/" method="get" role="search">
+            <label class="sr-only" for="q">Search query</label>
+            <input id="q" name="q" class="search-input" type="search" placeholder="Type your search and press Enter" value="<%= h(params[:q]) if defined?(params) && params[:q] %>" autocomplete="off" />
+            <button class="search-btn" type="submit" aria-label="Search">Search</button>
+        </form>
+        </div>
+    </div>
+    </body>
+</html>
