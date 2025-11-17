@@ -4,7 +4,7 @@ require "sinatra/activerecord"
 require 'chartkick'
 require 'groupdate'
 require './scrapers/amazon_scraper'
-# require './scrapers/magazine_luiza_scraper'
+require './scrapers/mercado_livre_scraper'
 # require './scrapers/americanas_scraper'
 # require './scrapers/submarino_scraper'
 
@@ -27,8 +27,10 @@ class BooksApp < Sinatra::Base
     @search = Search.create(term: term)
 
     @amazon_scraper  = AmazonScraper.new(term)
+    @mercadolivre_scraper = MercadoLivreScraper.new(term)
     
     @search.scrapings.create(store: :amazon, link: @amazon_scraper.link, title: @amazon_scraper.title, price: @amazon_scraper.price)
+    @search.scrapings.create(store: :mercado_livre, link: @mercadolivre_scraper.link, title: @mercadolivre_scraper.title, price: @mercadolivre_scraper.price)
 
     response.headers['Content-Type'] = 'text/vnd.turbo-stream.html'
     erb :results, layout: false

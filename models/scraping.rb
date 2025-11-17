@@ -3,5 +3,5 @@ class Scraping < ActiveRecord::Base
 
   validates :title, :price, presence: true
 
-  enum :store, [ :amazon, :magazine_luiza, :americanas, :submarino ]
+  enum :store, [ :amazon, :mercado_livre, :americanas, :submarino ]
 end
