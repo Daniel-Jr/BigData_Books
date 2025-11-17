@@ -1,0 +1,13 @@
+<% @searches.each do |search| %>
+    <article>
+        <h2><%= search.term %></h2>
+        <% search.scrapings.each do |scraping| %>
+            <details>
+                <summary><a href="<%= scraping.link %>" target="_blank"><%= scraping.title %></summary>
+                <a>Loja: <%= scraping.store.capitalize %></a>
+                <p>Preço: R$ <%= scraping.price %></p>
+            </details>
+        <% end %>
+        <%= column_chart(search.scrapings.order("price DESC").pluck(:title, :price)) %>
+    </article>
+<% end %>

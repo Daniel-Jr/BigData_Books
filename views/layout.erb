@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.20/dist/turbo.es2017-umd.min.js"></script>
+  <script src="chartkick.js"></script>
+  <script src="chart.umd.js"></script>
+  <script src="chartjs-adapter-date-fns.bundle.js"></script>
+  <title>Buscar</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/searches">Buscas</a>
+
+    <h1>BigData Books</h1>
+
+    <p>Aplicação em sintra para criar um dashboard de preços gerados por webscraping</p>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
+</body>
+</html>
