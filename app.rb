@@ -5,6 +5,7 @@ require 'chartkick'
 require 'groupdate'
 require './scrapers/amazon_scraper'
 require './scrapers/mercado_livre_scraper'
+require './scrapers/estante_virtual_scraper'
 # require './scrapers/americanas_scraper'
 # require './scrapers/submarino_scraper'
 
@@ -27,17 +28,19 @@ class BooksApp < Sinatra::Base
     @search = Search.create(term: term)
 
     @amazon_scraper  = AmazonScraper.new(term)
-    @mercadolivre_scraper = MercadoLivreScraper.new(term)
+    @mercado_livre_scraper = MercadoLivreScraper.new(term)
+    @estante_virtual_scraper = EstanteVirtualScraper.new(term)
     
     @search.scrapings.create(store: :amazon, link: @amazon_scraper.link, title: @amazon_scraper.title, price: @amazon_scraper.price)
-    @search.scrapings.create(store: :mercado_livre, link: @mercadolivre_scraper.link, title: @mercadolivre_scraper.title, price: @mercadolivre_scraper.price)
+    @search.scrapings.create(store: :mercado_livre, link: @mercado_livre_scraper.link, title: @mercado_livre_scraper.title, price: @mercado_livre_scraper.price)
+    @search.scrapings.create(store: :estante_virtual, link: @estante_virtual_scraper.link, title: @estante_virtual_scraper.title, price: @estante_virtual_scraper.price)
 
     response.headers['Content-Type'] = 'text/vnd.turbo-stream.html'
     erb :results, layout: false
   end
 
   get '/searches' do
-    @searches = Search.all
+    @searches = Search.by_created
 
     erb :searches, layout: :layout
   end
