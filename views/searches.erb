@@ -9,5 +9,6 @@
             </details>
         <% end %>
         <%= column_chart(search.scrapings.order("price DESC").pluck(:title, :price)) %>
+        <p>Criado Em: <%= search.created_at.strftime("%d/%m/%Y %H:%M:%S") %></p>
     </article>
 <% end %>
