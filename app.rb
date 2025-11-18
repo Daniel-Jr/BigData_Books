@@ -6,8 +6,7 @@ require 'groupdate'
 require './scrapers/amazon_scraper'
 require './scrapers/mercado_livre_scraper'
 require './scrapers/estante_virtual_scraper'
-# require './scrapers/americanas_scraper'
-# require './scrapers/submarino_scraper'
+require './scrapers/travessa_scraper'
 
 current_dir = Dir.pwd
 Dir["#{current_dir}/models/*.rb"].each { |file| require file }
@@ -30,10 +29,12 @@ class BooksApp < Sinatra::Base
     @amazon_scraper  = AmazonScraper.new(term)
     @mercado_livre_scraper = MercadoLivreScraper.new(term)
     @estante_virtual_scraper = EstanteVirtualScraper.new(term)
+    @travessa_scraper = TravessaScraper.new(term)
     
     @search.scrapings.create(store: :amazon, link: @amazon_scraper.link, title: @amazon_scraper.title, price: @amazon_scraper.price)
     @search.scrapings.create(store: :mercado_livre, link: @mercado_livre_scraper.link, title: @mercado_livre_scraper.title, price: @mercado_livre_scraper.price)
     @search.scrapings.create(store: :estante_virtual, link: @estante_virtual_scraper.link, title: @estante_virtual_scraper.title, price: @estante_virtual_scraper.price)
+    @search.scrapings.create(store: :travessa, link: @travessa_scraper.link, title: @travessa_scraper.title, price: @travessa_scraper.price)
 
     response.headers['Content-Type'] = 'text/vnd.turbo-stream.html'
     erb :results, layout: false

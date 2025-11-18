@@ -1,12 +1,14 @@
-<turbo-stream action="append" target="results-list">
+<turbo-stream action="replace" target="results-list">
   <template>
-    <% @search.scrapings.each do |scraping| %>
-        <details>
-            <summary><a href="<%= scraping.link %>" target="_blank"><%= scraping.title %></summary>
-            <a>Loja: <%= scraping.store.capitalize %></a>
-            <p>Preço: R$ <%= scraping.price %></p>
-        </details>
-    <% end %>
-    <%= column_chart(@search.scrapings.order("price DESC").pluck(:title, :price)) %>
+    <article id="results-list">
+      <% @search.scrapings.order("price ASC").each do |scraping| %>
+          <details>
+              <summary><a href="<%= scraping.link %>" target="_blank"><%= scraping.title %></summary>
+              <a>Loja: <%= scraping.store.capitalize %></a>
+              <p>Preço: R$ <%= scraping.price %></p>
+          </details>
+      <% end %>
+      <%= column_chart(@search.scrapings.order("price DESC").pluck(:title, :price)) %>
+    </article>      
   </template>
 </turbo-stream>
